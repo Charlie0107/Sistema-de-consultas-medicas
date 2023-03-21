@@ -20,20 +20,22 @@
 							<input type="text" th:field="*{servicio}" id="servicio" class="form-control" placeholder="Ingresa tu servicio"/> <br/>
 						</div>
 						<div class="form-group">
-							<label for="medico">Medico</label>
-							<input type="text" th:field="*{medico}" id="medico" class="form-control" placeholder="Ingresa tu medico"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="fecha">Fecha de consulta</label>
-							<input type="date" th:field="*{fecha}" id="fecha" class="form-control"/> <br/>
-						</div>
-						<div class="form-group">
-							<label>Status</label>
-							<input type="checkbox" th:field="*{status}"/> <br/>
+							<label for="fecha_atencion">Fecha de atencion</label>
+							<input type="date" th:field="*{fecha_atencion}" id="fecha_atencion" class="form-control"/> <br/>
 						</div>
 						<div class="form-group">
 							<label for="pago">Pago</label>
 							<input type="text" th:field="*{pago}" id="pago" class="form-control" placeholder="Cantidad de pago"/> <br/>
+						</div>
+						<div class="form-group">
+							<label for="medico">Medico</label>
+							<div>
+								<select th:field="*{medico}" class="form-select" required>
+									<th:block th:each="medico : ${medicos}">
+										<option th:text="${medico.cedula}" th:value="${medico.id}"></option>
+									</th>
+								</select> <br/>
+							</div>
 						</div>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-info">

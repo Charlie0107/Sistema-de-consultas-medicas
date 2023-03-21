@@ -27,16 +27,33 @@ public class Especialidad {
 
 	@OneToMany
 	@JoinColumn(name = "especialidad_id")
-	private List<Medico> medicos = new ArrayList<>();
+	private List<Medico> listamedicos = new ArrayList<>();
 	
 	
-	public Especialidad() {}
+	public Especialidad() {
+		super();
+	}
 
-	public Especialidad(long id, String nombreEspecialidad) {
+
+	public Especialidad(long id, String nombreEspecialidad, List<Medico> listamedicos) {
 		super();
 		this.id = id;
 		this.nombreEspecialidad = nombreEspecialidad;
+		this.listamedicos = listamedicos;
 	}
+
+	public Especialidad(String nombreEspecialidad, List<Medico> listamedicos) {
+		super();
+		this.nombreEspecialidad = nombreEspecialidad;
+		this.listamedicos = listamedicos;
+	}
+
+	public Especialidad(long id) {
+		super();
+		this.id = id;
+	}
+	
+		
 
 	public long getId() {
 		return id;
@@ -54,6 +71,27 @@ public class Especialidad {
 		this.nombreEspecialidad = nombreEspecialidad;
 	}
 	
+
+	public List<Medico> getListamedicos() {
+		return this.listamedicos;
+	}
+
+	public void setListamedicos(List<Medico> listamedicos) {
+		this.listamedicos = listamedicos;
+	}
+	
+
+
+	@Override
+	public String toString() {
+		return "{" +
+			"nombreEspecialidad='" + getNombreEspecialidad() + "'" +
+			", listamedicos='" + getListamedicos() + "'" +
+			"}";
+	}
+	
+
+
 	
 
 }

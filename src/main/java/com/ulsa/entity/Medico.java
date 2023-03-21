@@ -31,15 +31,34 @@ public class Medico {
 
 	
 	public Medico(){
-		
+		super();
 	}
 
 
 	public Medico(long id, String cedula, Especialidad especialidad, Persona persona) {
+		super();
 		this.id = id;
 		this.cedula = cedula;
 		this.especialidad = especialidad;
 		this.persona = persona;
+	}
+
+	public Medico(String cedula, Especialidad especialidad, Persona persona) {
+		super();
+		this.cedula = cedula;
+		this.especialidad = especialidad;
+		this.persona = persona;
+	}
+
+
+	public Medico(long id) {
+		super();
+		this.id = id;
+	}
+
+	public Medico(String cedula) {
+		super();
+		this.cedula = cedula;
 	}
 
 
@@ -92,6 +111,11 @@ public class Medico {
 	}
 	
 	
+
+	@Override
+	public String toString() {
+		return cedula;
+	}
 	
 
 }

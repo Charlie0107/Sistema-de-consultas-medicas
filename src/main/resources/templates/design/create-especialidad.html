@@ -19,6 +19,16 @@
 							<label for="nombreEspecialidad">Nombre</label>
 							<input type="text" th:field="*{nombreEspecialidad}" id="nombreEspecialidad" class="form-control" placeholder="Ingresa la especialidad"/> <br/>
 						</div>
+						<div class="form-group">
+							<label for="medico">Medico</label>
+							<div>
+								<select th:field="*{listamedicos}" class="form-select" multiple="multiple" required>
+									<th:block th:each="medico : ${medicos}">
+										<option th:text="${medico.cedula}" th:value="${medico.id}"></option>
+									</th>
+								</select> <br/>
+							</div>
+						</div>
 						
 						<div class="box-footer">
 							<button type="submit" class="btn btn-info">

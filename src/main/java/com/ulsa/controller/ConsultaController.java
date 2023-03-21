@@ -1,5 +1,7 @@
 package com.ulsa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,24 +12,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ulsa.entity.Consulta;
+import com.ulsa.entity.Medico;
 import com.ulsa.repository.ConsultaRepository;
+import com.ulsa.repository.MedicoRepository;
 
 @Controller
 public class ConsultaController {
-	/*
-private final ConsultaRepository consultaRepository;
+
+@Autowired
+private ConsultaRepository consultaRepository;
+@Autowired
+private MedicoRepository medicoRepository;
 	
+	/*
 	@Autowired
 	public ConsultaController(ConsultaRepository consultaRepository) {
 		this.consultaRepository = consultaRepository;		
 	}
-
+ 	*/
 	
 	
 	@GetMapping("/consultas")
 	public String indexConsultas(Model model) {
+		List<Consulta> consultas = consultaRepository.findAll();
 		System.out.println("&&&&& index´Consultas &&&&&&");
-		model.addAttribute("consultas", consultaRepository.findAll());
+		model.addAttribute("consultas", consultas);
 		return "design/index-consulta";
 		
 	}
@@ -43,7 +52,10 @@ private final ConsultaRepository consultaRepository;
 	}
 	
 	@GetMapping("/newconsulta")
-	public String showSignUpFormConsulta(Consulta consulta) {
+	public String showSignUpFormConsulta(Model model) {
+		List<Medico> medicos = medicoRepository.findAll();
+		model.addAttribute("consulta", new Consulta());
+		model.addAttribute("medicos", medicos);
 		System.out.println("&&&&& showSignUpForm &&&&&&");
 		return "design/create-consulta";
 	}
@@ -80,5 +92,5 @@ private final ConsultaRepository consultaRepository;
 		model.addAttribute("consultas", consultaRepository.findAll());
 		return "design/index-consulta";
 	}
-	*/
+	
 }

@@ -27,17 +27,34 @@ public class Consulta {
 
 	@ManyToOne
 	@JoinColumn(name = "medico_id")
-	private Consulta consulta;
+	private Medico medico;
 
-	public Consulta() {}
+	public Consulta() {
+		super();
+	}
 	
 
-	public Consulta(long id, String servicio, Date fecha_atencion, float pago, Consulta consulta) {
+	public Consulta(long id, String servicio, Date fecha_atencion, float pago, Medico medico) {
+		super();
 		this.id = id;
 		this.servicio = servicio;
 		this.fecha_atencion = fecha_atencion;
 		this.pago = pago;
-		this.consulta = consulta;
+		this.medico = medico;
+	}
+
+	public Consulta(String servicio, Date fecha_atencion, float pago, Medico medico) {
+		super();
+		this.servicio = servicio;
+		this.fecha_atencion = fecha_atencion;
+		this.pago = pago;
+		this.medico = medico;
+	}
+
+	public Consulta(String servicio) {
+		super();
+		this.servicio = servicio;
+
 	}
 
 
@@ -73,12 +90,12 @@ public class Consulta {
 		this.pago = pago;
 	}
 
-	public Consulta getConsulta() {
-		return this.consulta;
+	public Medico getMedico() {
+		return this.medico;
 	}
 
-	public void setConsulta(Consulta consulta) {
-		this.consulta = consulta;
+	public void setMedico(Medico medico) {
+		this.medico = medico;
 	}
 	
 

@@ -127,6 +127,23 @@ public class Persona {
         this.celular = celular;
     }
 
+    public Medico getMedico() {
+        return this.medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+    public Paciente getPaciente() {
+        return this.paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+
 
 	
     

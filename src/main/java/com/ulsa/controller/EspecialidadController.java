@@ -1,5 +1,7 @@
 package com.ulsa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,40 +12,50 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ulsa.entity.Especialidad;
+import com.ulsa.entity.Medico;
 import com.ulsa.repository.EspecialidadRepository;
+import com.ulsa.repository.MedicoRepository;
 
 @Controller
 public class EspecialidadController {
-	/*
-private final EspecialidadRepository especialidadRepository;
+@Autowired
+private EspecialidadRepository especialidadRepository;
+
+@Autowired
+private MedicoRepository medicoRepository;
 	
+	/* 
 	@Autowired
 	public EspecialidadController(EspecialidadRepository especialidadRepository) {
 		this.especialidadRepository = especialidadRepository;		
 	}
+	*/
 	
 
 	
 	@GetMapping("/especialidades")
 	public String indexEspecialidad(Model model) {
+		List<Especialidad> especialidades = especialidadRepository.findAll();
 		System.out.println("&&&&& index´Especialidad &&&&&&");
-		model.addAttribute("especialidades", especialidadRepository.findAll());
+		model.addAttribute("especialidades", especialidades);
+		//model.addAttribute("especialidades", especialidadRepository.findAll());
 		return "design/index-especialidad";
 		
 	}
 	
 	@PostMapping("/addespecialidad")
-	public String addEspecialidad(@Validated Especialidad especialidad, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			return "design/create-especialidad";
-		}
+	public String addEspecialidad(Especialidad especialidad) {
+
 		especialidadRepository.save(especialidad);
-		model.addAttribute("especialidad", especialidadRepository.findAll());
+		//model.addAttribute("especialidad", especialidadRepository.findAll());
 		return "design/index-especialidad";
 	}
 	
 	@GetMapping("/newespecialidad")
-	public String showSignUpFormEspecialidad(Especialidad especialidad) {
+	public String showSignUpFormEspecialidad(Model model) {
+		List<Medico> medicos = medicoRepository.findAll();
+		model.addAttribute("medicos", medicos);
+		model.addAttribute("especialidad", new Especialidad());
 		System.out.println("&&&&& showSignUpForm &&&&&&");
 		return "design/create-especialidad";
 	}
@@ -80,5 +92,5 @@ private final EspecialidadRepository especialidadRepository;
 		model.addAttribute("pacientes", especialidadRepository.findAll());
 		return "design/index-especialidad";
 	}
-*/
+
 }

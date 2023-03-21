@@ -42,10 +42,9 @@
 			<thead class="table-light">
 				<tr>
 					<th>Servicio</th>
-					<th>Medico</th>
 					<th>Fecha</th>
-					<th>Status</th>
 					<th>Pago</th>
+					<th>Medico</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -53,11 +52,10 @@
 			<tbody>
 				<tr th:each="consulta : ${consultas}">
 					<td th:text="${consulta.servicio}"></td>
-					<td th:text="${consulta.medico}"></td>
-					<td th:text="${consulta.fecha}"></td>
-					<td th:text="${consulta.status}"></td>
+					<td th:text="${consulta.fecha_atencion}"></td>
 					<td th:text="${consulta.pago}"></td>
-					<td>
+					<td th:text="${consulta.medico.cedula}"></td>
+					<td>	
 						<a th:href="@{/editConsulta/{id}(id=${consulta.id})}"
 						class="btn btn-outline-info">
 						Editar

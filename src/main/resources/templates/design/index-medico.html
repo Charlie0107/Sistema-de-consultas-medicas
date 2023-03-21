@@ -42,25 +42,13 @@
 			<thead class="table-light">
 				<tr>
 					<th>Cédula</th>
-					<th>Nombre</th>
-					<th>Apellido Paterno</th>
-					<th>Apellido Materno</th>
-					<th>Genero</th>
-					<th>Email</th>
-					<th>Celular</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				<tr th:each="medico : ${medicos}">
-					<td th:text="${medico.cedula}"></td>
-					<td th:text="${medico.nombre}"></td>
-					<td th:text="${medico.apePat}"></td>
-					<td th:text="${medico.apeMat}"></td>
-					<td th:text="${medico.genero}"></td>
-					<td th:text="${medico.email}"></td>				
-					<td th:text="${medico.celular}"></td>				
+					<td th:text="${medico.cedula}"></td>			
 					<td>
 						<a th:href="@{/editMedico/{id}(id=${medico.id})}"
 						class="btn btn-outline-info">

@@ -1,5 +1,7 @@
 package com.ulsa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,45 +13,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.ulsa.entity.Especialidad;
 import com.ulsa.entity.Medico;
+import com.ulsa.repository.EspecialidadRepository;
 import com.ulsa.repository.MedicoRepository;
-
-
-
 
 @Controller
 public class MedicoController {
-	/*
-	//private PacienteService pacienteService;
-	private final MedicoRepository medicoRepository;
 	
+	//private PacienteService pacienteService;
+	@Autowired
+	private MedicoRepository medicoRepository;
+
+	@Autowired
+	private EspecialidadRepository especialidadRepository;
+	
+	/*
 	@Autowired
 	public MedicoController(MedicoRepository medicoRepository) {
 		this.medicoRepository = medicoRepository;		
 	}
-
-
+	 */
 	
 	@GetMapping("/medicos")
 	public String indexMedicos(Model model) {
+		List<Medico> medicos = medicoRepository.findAll();
 		System.out.println("&&&&& index´Medicos &&&&&&");
-		model.addAttribute("medicos", medicoRepository.findAll());
-		return "design/index-medico";
-		
+		model.addAttribute("medicos", medicos);
+		//model.addAttribute("medicos", medicoRepository.findAll());
+		return "design/index-medico";		
 	}
 	
 	@PostMapping("/addmedico")
-	public String addMedico(@Validated @RequestBody Medico medico, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			return "design/create-medico";
-		}
+	public String addMedico(Medico medico) {
 		medicoRepository.save(medico);
-		model.addAttribute("medicos", medicoRepository.findAll());
 		return "design/index-medico";
 	}
 	
 	@GetMapping("/newmedico")
-	public String showSignUpFormMedico(Medico medico) {
+	public String showSignUpFormMedico(Model model) {
+		model.addAttribute("medico", new Medico());
 		System.out.println("&&&&& showSignUpForm &&&&&&");
 		return "design/create-medico";
 	}
@@ -86,6 +89,6 @@ public class MedicoController {
 		model.addAttribute("medicos", medicoRepository.findAll());
 		return "design/index-medico";
 	}
-*/
+
 }
 

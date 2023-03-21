@@ -42,6 +42,7 @@
 			<thead class="table-light">
 				<tr>
 					<th>Especialidad</th>
+					<th>Medicos</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -49,6 +50,7 @@
 			<tbody>
 				<tr th:each="especialidad : ${especialidades}">
 					<td th:text="${especialidad.nombreEspecialidad}"></td>
+					<td th:text="${especialidad.listamedicos}"></td>
 					<td>
 						<a th:href="@{/editEspecialidad/{id}(id=${especialidad.id})}"
 						class="btn btn-outline-info">
