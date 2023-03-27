@@ -26,20 +26,6 @@ public class MedicalController {
 		this.pacienteRepository = pacienteRepository;		
 	}
 	
-	
-
-	@GetMapping("/")
-	public String indexPage() {
-
-		return "index";
-	}
-
-	@GetMapping("/login")
-	public String loginPage() {
-
-		return "login";
-	}
-	
 	@GetMapping("/pacientes")
 	public String indexPacientes(Model model) {
 		System.out.println("&&&&& index´Pacientes &&&&&&");

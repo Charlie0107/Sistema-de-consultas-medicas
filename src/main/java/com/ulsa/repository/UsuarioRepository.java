@@ -15,6 +15,8 @@ import com.ulsa.entity.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
+
+    public Usuario findByEmail(String email);
     //@Query
     //public Usuario getUsuarioByEmail(@Param("email") String email);
 

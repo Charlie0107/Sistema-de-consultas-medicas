@@ -1,4 +1,6 @@
 package com.ulsa.security;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,17 +10,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfiguration{
-	
-	@Bean
-	public UserDetailsService userDetailsService(){
-		return new UserDetailsServiceImpl();
-	}
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+
+	 
+	@Autowired
+	private UserService userService;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -27,27 +32,42 @@ public class WebSecurityConfig extends WebSecurityConfiguration{
 	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEncoder());
-		return authProvider;
+		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+		auth.setUserDetailsService(userService);
+		auth.setPasswordEncoder(passwordEncoder());
+		return auth;
 	}
 	
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider());
 	}
-	
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.requestMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-				.requestMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR").requestMatchers("/edit/**")
-				.hasAnyAuthority("ADMIN", "EDITOR").requestMatchers("/delete/**").hasAuthority("ADMIN")
-				.requestMatchers("/h2-console/**").permitAll().anyRequest().authenticated().and().formLogin().permitAll()
-				.and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/403");
 
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+	
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers(
+				"/registro**",
+				"/js/**",
+				"/css/**",
+				"/img/**").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.permitAll()
+		.and()
+		.logout()
+		.invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/login?logout")
+		.permitAll();
 	}
+	
+
+	
 	
 	
 

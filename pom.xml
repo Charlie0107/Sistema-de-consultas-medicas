@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
+		<version>2.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ulsa</groupId>
@@ -57,7 +57,7 @@
     	</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -75,6 +75,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+
+            <groupId>com.google.guava</groupId>
+
+            <artifactId>guava</artifactId>
+
+            <version>28.1-jre</version>
+
+      	</dependency>
 	</dependencies>
 
 	<build>
