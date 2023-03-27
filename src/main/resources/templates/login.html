@@ -33,14 +33,14 @@
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email</label>
+                <input  type="email" th:field="*{email}" id="form3Example3" class="form-control" />
+                <label for="email" class="form-label" for="form3Example3">Email</label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Contraseña</label>
+                <input type="password" th:field="*{password}" id="form3Example4" class="form-control" />
+                <label for="password" class="form-label" for="form3Example4">Contraseña</label>
               </div>
 
               <!-- Checkbox -->

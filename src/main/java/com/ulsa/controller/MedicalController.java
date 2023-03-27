@@ -17,8 +17,8 @@ import com.ulsa.repository.PacienteRepository;
 
 @Controller
 public class MedicalController {
-	/*
-	private PacienteService pacienteService;
+	
+	//private PacienteService pacienteService;
 	private final PacienteRepository pacienteRepository;
 	
 	@Autowired
@@ -32,6 +32,12 @@ public class MedicalController {
 	public String indexPage() {
 
 		return "index";
+	}
+
+	@GetMapping("/login")
+	public String loginPage() {
+
+		return "login";
 	}
 	
 	@GetMapping("/pacientes")
@@ -90,5 +96,5 @@ public class MedicalController {
 		model.addAttribute("pacientes", pacienteRepository.findAll());
 		return "design/index-paciente";
 	}
-	*/
+	
 }

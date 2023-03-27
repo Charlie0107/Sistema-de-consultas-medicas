@@ -17,10 +17,22 @@ public class Rol {
     private long id;
     @Nonnull
     private String nombre;
+    @Nonnull
+    private String descripcion;
 
+    public Rol(){
+        super();
+    }
 
-    public Rol(long id, String nombre) {
+    public Rol(long id, String nombre, String descripcion) {
+        super();
         this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public Rol(String nombre) {
+        super();
         this.nombre = nombre;
     }
 
@@ -40,6 +52,16 @@ public class Rol {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
 
     
 }

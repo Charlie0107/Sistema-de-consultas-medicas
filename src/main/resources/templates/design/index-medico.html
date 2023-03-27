@@ -33,8 +33,18 @@
 		<div class="row">
 			<h1>Lista de médicos</h1>		
 		</div>	
+
+		<div sec:authorize="isAuthenticated()">
+			Welcome <b><span sec:authentication="name">Email</span></b> &nbsp;
+			<i><span sec:authentication="principal.authorities">Roles</span></i>
+		</div>
+		
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Logout" />
+		</form>
+
 		<div class="row">
-			<div class="col-lg-3"> 
+			<div class="col-lg-3" sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')"> 
 				<a th:href="@{/newmedico}" class="btn btn-success">Add médico</a>
 			</div>
 		</div>
@@ -42,7 +52,7 @@
 			<thead class="table-light">
 				<tr>
 					<th>Cédula</th>
-					<th>Acciones</th>
+					<th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">Action</th>
 				</tr>
 			</thead>
 			
