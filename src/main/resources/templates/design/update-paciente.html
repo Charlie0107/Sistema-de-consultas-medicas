@@ -16,41 +16,24 @@
 				<div class="card-body">
 					<form th:action="@{/update/{id} (id=${paciente.id})}" th:object="${paciente}" method="POST">
 						<div class="form-group">
-							<label for="nombre">Nombre</label>
-							<input type="text" th:field="*{nombre}" id="nombre" class="form-control" placeholder="Ingresa tu nombre"/> <br/>
+							<label for="peso">Peso</label>
+							<input type="text" th:field="*{peso}" id="peso" class="form-control" placeholder="Ingresa tu peso"/> <br/>
 						</div>
 						<div class="form-group">
-							<label for="apePat">Apellido Paterno</label>
-							<input type="text" th:field="*{apePat}" id="apePat" class="form-control" placeholder="Ingresa tu apellido paterno"/> <br/>
+							<label for="altura">Altura</label>
+							<input type="text" th:field="*{altura}" id="altura" class="form-control" placeholder="Ingresa tu altura"/> <br/>
 						</div>
 						<div class="form-group">
-							<label for="apeMat">Apellido Materno</label>
-							<input type="text" th:field="*{apeMat}" id="apeMat" class="form-control" placeholder="Ingresa tu apellido materno"/> <br/>
+							<label for="temperatura">Temperatura</label>
+							<input type="text" th:field="*{temperatura}" id="temperatura" class="form-control" placeholder="Ingresa tu temperatura"/> <br/>
 						</div>
 						<div class="form-group">
-							<label for="edad">Edad</label>
-							<input type="text" th:field="*{edad}" id="edad" class="form-control" placeholder="Ingresa tu edad"/> <br/>
+							<label for="presion">Presion</label>
+							<input type="text" th:field="*{presion}" id="presion" class="form-control" placeholder="Ingresa tu presion"/> <br/>
 						</div>
 						<div class="form-group">
-							<label for="genero">Género</label> <br/>
-							<input type="radio" th:field="*{genero}" id="genero" value="Masculino" />Masculino <br/>
-							<input type="radio" th:field="*{genero}" id="genero" value="Femenino" />Femenino <br/>
-						</div>
-						<div class="form-group">
-							<label for="fechaNacimiento">Birthday</label>
-							<input type="date" th:field="*{fechaNacimiento}" id="fechaNacimiento" class="form-control"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="email">Email</label>
-							<input type="text" th:field="*{email}" id="email" class="form-control" placeholder="Ingresa tu email"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="direccion">Direccion</label>
-							<input type="text" th:field="*{direccion}" id="direccion" class="form-control" placeholder="Ingresa tu direccion"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="celular">Celular</label>
-							<input type="text" th:field="*{celular}" id="celular" class="form-control" placeholder="Ingresa tu celular"/> <br/>
+							<label for="presion">Alergias</label>
+							<input type="text" th:field="*{presion}" id="presion" class="form-control" placeholder="Ingresa tu presion"/> <br/>
 						</div>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-info">

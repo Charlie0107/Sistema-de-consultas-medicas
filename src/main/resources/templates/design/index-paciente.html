@@ -18,9 +18,11 @@
         <ul class="nav-navbar container">
             <li class="nav-item"><a th:href="@{/consultas}" class="nav-link">Consultas</a></li>
             <li class="nav-item"><a th:href="@{/pacientes}" class="nav-link">Pacientes</a></li>
+			<li class="nav-item"><a th:href="@{/personas}" class="nav-link">Personas</a></li>
             <li class="nav-item"><a th:href="@{/}" class="nav-link"><img src="/imgs/placeholder.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page"></a></li>
             <li class="nav-item"><a th:href="@{/medicos}" class="nav-link">Médicos</a></li>
             <li class="nav-item"><a th:href="@{/especialidades}" class="nav-link">Especialidades</a></li>
+			<li class="nav-item"><a th:href="@{/medicamentos}" class="nav-link">Medicamentos</a></li>
         </ul>
     </nav><!-- end of page navbar -->
     
@@ -31,40 +33,32 @@
 <br/>
 	<div class="container">
 		<div class="row">
-			<h1>Lista de pacientes</h1>		
+			<h1>Lista de personas</h1>		
 		</div>	
 		<div class="row">
 			<div class="col-lg-3"> 
-				<a th:href="@{/new}" class="btn btn-success">Add paciente</a>
+				<a th:href="@{/new}" class="btn btn-success">Add Persona</a>
 			</div>
 		</div>
 		<table class="table table-dark table-striped">
 			<thead class="table-light">
 				<tr>
-					<th>Nombre</th>
-					<th>Apellido Paterno</th>
-					<th>Apellido Materno</th>
-					<th>Edad</th>
-					<th>Genero</th>
-					<th>Fecha de nacimiento</th>
-					<th>Email</th>
-					<th>Direccion</th>
-					<th>Celular</th>
+					<th>Peso</th>
+					<th>Altura</th>
+					<th>Temperatura</th>
+					<th>Presion</th>
+					<th>Alergias</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				<tr th:each="paciente : ${pacientes}">
-					<td th:text="${paciente.nombre}"></td>
-					<td th:text="${paciente.apePat}"></td>
-					<td th:text="${paciente.apeMat}"></td>
-					<td th:text="${paciente.edad}"></td>
-					<td th:text="${paciente.genero}"></td>
-					<td th:text="${paciente.fechaNacimiento}"></td>
-					<td th:text="${paciente.email}"></td>
-					<td th:text="${paciente.direccion}"></td>
-					<td th:text="${paciente.celular}"></td>
+					<td th:text="${paciente.peso}"></td>
+					<td th:text="${paciente.altura}"></td>
+					<td th:text="${paciente.temperatura}"></td>
+					<td th:text="${paciente.presion}"></td>
+					<td th:text="${paciente.alergias}"></td>
 					<td>
 						<a th:href="@{/edit/{id}(id=${paciente.id})}"
 						class="btn btn-outline-info">

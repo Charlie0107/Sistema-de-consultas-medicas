@@ -25,23 +25,31 @@ public class Paciente {
 	private String temperatura;
 	@Nonnull
 	private String presion;	
+	@Nonnull
+	private String alergias;	
 
 	@OneToOne
 	@JoinColumn(name = "persona_id")
 	private Persona persona;
 	
-	public Paciente() {	}
+	public Paciente() {	
+		super();
+	}
 
 
 
-	public Paciente(long id, String peso, String altura, String temperatura, String presion, Persona persona) {
+
+	public Paciente(long id, String peso, String altura, String temperatura, String presion, String alergias, Persona persona) {
+		super();
 		this.id = id;
 		this.peso = peso;
 		this.altura = altura;
 		this.temperatura = temperatura;
 		this.presion = presion;
+		this.alergias = alergias;
 		this.persona = persona;
 	}
+
 
 
 
@@ -84,6 +92,15 @@ public class Paciente {
 	public void setPresion(String presion) {
 		this.presion = presion;
 	}
+
+	public String getAlergias() {
+		return this.alergias;
+	}
+
+	public void setAlergias(String alergias) {
+		this.alergias = alergias;
+	}
+
 
 	public Persona getPersona() {
 		return this.persona;

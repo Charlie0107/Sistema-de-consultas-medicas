@@ -28,6 +28,8 @@ public class Persona {
 	@Nonnull
 	private String genero;
     @Nonnull
+	private String edad;
+    @Nonnull
     private Date fecha_nacimiento;
     @Nonnull
 	private String email;
@@ -41,18 +43,28 @@ public class Persona {
     @OneToOne(mappedBy = "persona")
     private Paciente paciente;
 
+    public Persona(){
+        super();
+    }
 
-    public Persona(long id, String nombre, String apePat, String apeMat, String genero, Date fecha_nacimiento, String email, String direccion, String celular) {
+
+
+    public Persona(long id, String nombre, String apePat, String apeMat, String genero, String edad, Date fecha_nacimiento, String email, String direccion, String celular, Medico medico, Paciente paciente) {
+        super();
         this.id = id;
         this.nombre = nombre;
         this.apePat = apePat;
         this.apeMat = apeMat;
         this.genero = genero;
+        this.edad = edad;
         this.fecha_nacimiento = fecha_nacimiento;
         this.email = email;
         this.direccion = direccion;
         this.celular = celular;
+        this.medico = medico;
+        this.paciente = paciente;
     }
+    
 
 
     public long getId() {
@@ -143,6 +155,13 @@ public class Persona {
         this.paciente = paciente;
     }
 
+    public String getEdad() {
+        return this.edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
 
 
 	

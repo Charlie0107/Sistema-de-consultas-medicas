@@ -64,16 +64,4 @@ public class UserDetailsServiceImpl implements UserService {
 		return usuarioRepository.findAll();
 	}
 
-
-	
-	/*
-	public MyUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.getUsuarioByEmail(email);
-		if(usuario == null){
-            throw new UsernameNotFoundException("No se pudo encontrar el usuario");
-        }
-		return new MyUserDetails(usuario);
-	}
-	*/
-
 }

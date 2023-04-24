@@ -3,7 +3,7 @@
 	
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Listado de pacientes</title>
+	<title>Listado de personas</title>
 	<!-- font icons -->
     <link rel="stylesheet" href="/vendors/themify-icons/css/themify-icons.css">
 
@@ -33,45 +33,58 @@
 <br/>
 	<div class="container">
 		<div class="row">
-			<h1>Lista de médicos</h1>		
+			<h1>Lista de personas</h1>		
 		</div>	
 		<div class="row">
 			<div class="col-lg-3"> 
-				<a th:href="@{/newmedico}" class="btn btn-success">Add médico</a>
+				<a th:href="@{/newpersona}" class="btn btn-success">Add Persona</a>
 			</div>
 		</div>
 		<table class="table table-dark table-striped">
 			<thead class="table-light">
 				<tr>
-					<th>Cédula</th>
 					<th>Nombre</th>
-					<th>Apellido Materno</th>
 					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>Edad</th>
+					<th>Genero</th>
+					<th>Fecha de nacimiento</th>
+					<th>Email</th>
+					<th>Direccion</th>
+					<th>Celular</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			
 			<tbody>
-				<tr th:each="medico : ${medicos}">
-					<td th:text="${medico.cedula}"></td>	
-					<td th:text="${medico.persona.nombre}"></td>	
-					<td th:text="${medico.persona.apeMat}"></td>	
-					<td th:text="${medico.persona.apePat}"></td>		
+				<tr th:each="persona : ${personas}">
+					<td th:text="${persona.nombre}"></td>
+					<td th:text="${persona.apePat}"></td>
+					<td th:text="${persona.apeMat}"></td>
+					<td th:text="${persona.edad}"></td>
+					<td th:text="${persona.genero}"></td>
+					<td th:text="${persona.fecha_nacimiento}"></td>
+					<td th:text="${persona.email}"></td>
+					<td th:text="${persona.direccion}"></td>
+					<td th:text="${persona.celular}"></td>
 					<td>
-						<a th:href="@{/editPersona/{id}(id=${persona.id})}"
+						<a th:href="@{/editpersona/{id}(id=${persona.id})}"
 						class="btn btn-outline-info">
 						Editar
 						</a>
-						<a th:href="@{/deletePersona/{id}(id=${persona.id})}"
+						<a th:href="@{/deletepersona/{id}(id=${persona.id})}"
 						class="btn btn-outline-danger">
 						Eliminar
 						</a>
 					</td>
+					
 				</tr>
 			</tbody>
 		</table>	
 	</div>
 	
 </body>
+	
+	
 	
 </html>

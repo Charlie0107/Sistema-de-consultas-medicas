@@ -19,6 +19,30 @@
 							<label for="cedula">Cédula</label>
 							<input type="text" th:field="*{cedula}" id="cedula" class="form-control" placeholder="Ingresa tu cédula"/> <br/>
 						</div>
+						<div class="form-group">
+							<label for="persona">Persona</label>
+							<div>
+								<select th:field="*{persona}" class="form-select" required>
+									<th:block th:each="persona : ${personas}">
+										<option th:text="${persona.nombre}" th:value="${persona.id}"></option>
+									</th>
+								</select> <br/>
+							</div>
+							<div>
+								<select th:field="*{persona}" class="form-select" required>
+									<th:block th:each="persona : ${personas}">
+										<option th:text="${persona.apeMat}" th:value="${persona.id}"></option>
+									</th>
+								</select> <br/>
+							</div>
+							<div>
+								<select th:field="*{persona}" class="form-select" required>
+									<th:block th:each="persona : ${personas}">
+										<option th:text="${persona.apePat}" th:value="${persona.id}"></option>
+									</th>
+								</select> <br/>
+							</div>
+						</div>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-info">
 								Agregar

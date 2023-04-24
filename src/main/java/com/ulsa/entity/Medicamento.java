@@ -1,5 +1,7 @@
 package com.ulsa.entity;
 
+import java.sql.Date;
+
 import javax.annotation.Nonnull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,15 +20,31 @@ public class Medicamento {
     private long id;
     @Nonnull
     private String nombre;
+    @Nonnull
+    private String cantidad_contenida;
+    @Nonnull
+    private Date caducidad;
+    @Nonnull
+    private String num_serie;
+    @Nonnull
+    private String laboratorio;
 
     @ManyToOne
 	@JoinColumn(name = "receta_id")
 	private Receta receta;
     
+    public Medicamento(){
+        super();
+    }
 
-    public Medicamento(long id, String nombre) {
+    public Medicamento(long id, String nombre, String cantidad_contenida, Date caducidad, String num_serie, String laboratorio, Receta receta) {
         this.id = id;
         this.nombre = nombre;
+        this.cantidad_contenida = cantidad_contenida;
+        this.caducidad = caducidad;
+        this.num_serie = num_serie;
+        this.laboratorio = laboratorio;
+        this.receta = receta;
     }
 
 
@@ -46,6 +64,48 @@ public class Medicamento {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getCantidad_contenida() {
+        return this.cantidad_contenida;
+    }
+
+    public void setCantidad_contenida(String cantidad_contenida) {
+        this.cantidad_contenida = cantidad_contenida;
+    }
+
+    public Date getCaducidad() {
+        return this.caducidad;
+    }
+
+    public void setCaducidad(Date caducidad) {
+        this.caducidad = caducidad;
+    }
+
+    public String getNum_serie() {
+        return this.num_serie;
+    }
+
+    public void setNum_serie(String num_serie) {
+        this.num_serie = num_serie;
+    }
+
+    public String getLaboratorio() {
+        return this.laboratorio;
+    }
+
+    public void setLaboratorio(String laboratorio) {
+        this.laboratorio = laboratorio;
+    }
+
+    public Receta getReceta() {
+        return this.receta;
+    }
+
+    public void setReceta(Receta receta) {
+        this.receta = receta;
+    }
+
+
 
     
 }

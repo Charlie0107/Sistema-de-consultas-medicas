@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ulsa.entity.Medico;
+import com.ulsa.entity.Persona;
 import com.ulsa.repository.EspecialidadRepository;
 import com.ulsa.repository.MedicoRepository;
+import com.ulsa.repository.PersonaRepository;
 
 @Controller
 public class MedicoController {
@@ -25,6 +27,9 @@ public class MedicoController {
 
 	@Autowired
 	private EspecialidadRepository especialidadRepository;
+
+	@Autowired
+	private PersonaRepository personaRepository;
 	
 	/*
 	@Autowired
@@ -50,6 +55,8 @@ public class MedicoController {
 	
 	@GetMapping("/newmedico")
 	public String showSignUpFormMedico(Model model) {
+		List<Persona> personas = personaRepository.findAll();
+		model.addAttribute("personas", personas);
 		model.addAttribute("medico", new Medico());
 		System.out.println("&&&&& showSignUpForm &&&&&&");
 		return "design/create-medico";
