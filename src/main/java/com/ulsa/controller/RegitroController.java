@@ -15,7 +15,7 @@ public class RegitroController {
 
     @GetMapping("/login")
 	public String loginPage() {
-
+		System.out.println("/login");
 		return "login";
 	}
 	
