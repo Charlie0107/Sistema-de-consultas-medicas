@@ -23,7 +23,8 @@ public class RegitroController {
 	@GetMapping("/")
 	public String indexPage() {
 
-		return "index";
+		//return "index";
+		return "pages/landing_page";
 	}
 	 
 

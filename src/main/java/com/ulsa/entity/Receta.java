@@ -29,21 +29,28 @@ public class Receta {
     @Nonnull
     private int unidades;
     @Nonnull
-    private String Indicaciones;
+    private String indicaciones;
 
     @OneToMany
 	@JoinColumn(name = "receta_id")
 	private List<Medicamento> medicamento = new ArrayList<>();
 
+    public Receta(){
+        super();
+    }
 
-    public Receta(long id, String diagnostico, String duracion_tratamiento, String farmaco, int unidades, String Indicaciones) {
+
+    public Receta(long id, String diagnostico, String duracion_tratamiento, String farmaco, int unidades, String indicaciones, List<Medicamento> medicamento) {
+        super();
         this.id = id;
         this.diagnostico = diagnostico;
         this.duracion_tratamiento = duracion_tratamiento;
         this.farmaco = farmaco;
         this.unidades = unidades;
-        this.Indicaciones = Indicaciones;
+        this.indicaciones = indicaciones;
+        this.medicamento = medicamento;
     }
+
 
 
 
@@ -87,13 +94,23 @@ public class Receta {
         this.unidades = unidades;
     }
 
+
     public String getIndicaciones() {
-        return this.Indicaciones;
+        return this.indicaciones;
     }
 
-    public void setIndicaciones(String Indicaciones) {
-        this.Indicaciones = Indicaciones;
+    public void setIndicaciones(String indicaciones) {
+        this.indicaciones = indicaciones;
     }
+
+    public List<Medicamento> getMedicamento() {
+        return this.medicamento;
+    }
+
+    public void setMedicamento(List<Medicamento> medicamento) {
+        this.medicamento = medicamento;
+    }
+
 
     
 }
