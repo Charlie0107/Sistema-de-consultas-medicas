@@ -26,6 +26,12 @@ public class RegitroController {
 		//return "index";
 		return "pages/landing_page";
 	}
+
+	@GetMapping("/home")
+	public String indexPage2() {
+
+		return "index";
+	}
 	 
 
 	 /*
