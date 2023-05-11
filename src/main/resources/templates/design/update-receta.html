@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns=:th="http://thymeleaf.org">
-	
+<html lang="en" xmlns:th="http://thymeleaf.org"
+th:replace="~{layouts/dashboard :: main-fragment(
+	~{::#update-sidebar},
+	~{::#update-header},
+	~{::#update-title},
+	~{::#update-main-content},
+	~{::#update-footer}
+)}"
+>	
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Listado de receta</title>
@@ -9,52 +16,55 @@
 	</th:block>
 </head>
 <body>
+	<div id="update-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
+    <div id="update-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Editar receta</h1>
-				<div class="card-body">
-					<form th:action="@{/updatereceta/{id} (id=${receta.id})}" th:object="${receta}" method="POST">
-						<div class="form-group">
-							<label for="diagnostico">Diagnostico</label>
-							<input type="text" th:field="*{diagnostico}" id="diagnostico" class="form-control"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="duracion_tratamiento">Duracion del tratamiento</label>
-							<input type="text" th:field="*{duracion_tratamiento}" id="duracion_tratamiento" class="form-control"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="farmaco">Farmaco</label>
-							<input type="text" th:field="*{farmaco}" id="farmaco" class="form-control"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="unidades">Unidades</label>
-							<input type="text" th:field="*{unidades}" id="unidades" class="form-control" /> <br/>
-						</div>
-						<div class="form-group">
-							<label for="indicaciones">Indicaciones</label>
-							<input type="text" th:field="*{indicaciones}" id="indicaciones" class="form-control"/> <br/>
-						</div>
-                        <div>
-                            <select th:field="*{medicamento}" class="form-select" required>
-                                <th:block th:each="medicamento : ${medicamentos}">
-                                    <option th:text="${medicamento.nombre}" th:value="${medicamento.id}"></option>
-                                </th>
-                            </select> <br/>
-                        </div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-info">
-								Actualizar
-							</button>
-						</div>
-							
-					</form>
+		<div id="update-title" class="row"></div>
+		<div id="update-main-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h1 class="text-center">Editar receta</h1>
+					<div class="card-body">
+						<form th:action="@{/updatereceta/{id} (id=${receta.id})}" th:object="${receta}" method="POST">
+							<div class="form-group">
+								<label for="diagnostico">Diagnostico</label>
+								<input type="text" th:field="*{diagnostico}" id="diagnostico" class="form-control"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="duracion_tratamiento">Duracion del tratamiento</label>
+								<input type="text" th:field="*{duracion_tratamiento}" id="duracion_tratamiento" class="form-control"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="farmaco">Farmaco</label>
+								<input type="text" th:field="*{farmaco}" id="farmaco" class="form-control"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="unidades">Unidades</label>
+								<input type="text" th:field="*{unidades}" id="unidades" class="form-control" /> <br/>
+							</div>
+							<div class="form-group">
+								<label for="indicaciones">Indicaciones</label>
+								<input type="text" th:field="*{indicaciones}" id="indicaciones" class="form-control"/> <br/>
+							</div>
+							<div>
+								<select th:field="*{medicamento}" class="form-select" required>
+									<th:block th:each="medicamento : ${medicamentos}">
+										<option th:text="${medicamento.nombre}" th:value="${medicamento.id}"></option>
+									</th>
+								</select> <br/>
+							</div>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info">
+									Actualizar
+								</button>
+							</div>
+								
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 	</div>
+	<div id="create-footer" th:replace="~{/fragments/footer :: footer}"></div>
 </body>
-
-
-
 </html>

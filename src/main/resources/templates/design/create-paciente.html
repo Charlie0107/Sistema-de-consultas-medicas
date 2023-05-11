@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns=:th="http://thymeleaf.org">
-	
+<html lang="en" xmlns:th="http://thymeleaf.org"
+	th:replace="~{layouts/dashboard :: main-fragment(
+		~{::#create-sidebar},
+		~{::#create-header},
+		~{::#create-title},
+		~{::#create-main-content},
+		~{::#create-footer}
+	)}"
+>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Listado de pacientes</title>
@@ -9,43 +16,49 @@
 	</th:block>
 </head>
 <body>
+	<div id="create-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
+    <div id="create-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Crear nuevo Paciente</h1>
-				<div class="card-body">
-					<form th:action="@{/addpaciente}" th:object="${paciente}" method="POST">
-						<div class="form-group">
-							<label for="peso">Peso</label>
-							<input type="text" th:field="*{peso}" id="peso" class="form-control" placeholder="Ingresa tu peso"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="altura">Altura</label>
-							<input type="text" th:field="*{altura}" id="altura" class="form-control" placeholder="Ingresa tu altura"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="temperatura">Temperatura</label>
-							<input type="text" th:field="*{temperatura}" id="temperatura" class="form-control" placeholder="Ingresa tu temperatura"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="presion">Presion</label>
-							<input type="text" th:field="*{presion}" id="presion" class="form-control" placeholder="Ingresa tu presion"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="alergias">Alergias</label>
-							<input type="text" th:field="*{alergias}" id="alergias" class="form-control" placeholder="Ingresa tu presion"/> <br/>
-						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-info">
-								Agregar
-							</button>
-						</div>
-							
-					</form>
+		<div id="create-title" class="row"></div>
+		<div id="create-main-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h1 class="text-center" style="margin-top: revert;">Crear nuevo Paciente</h1>
+					<div class="card-body">
+						<form th:action="@{/addpaciente}" th:object="${paciente}" method="POST">
+							<div class="form-group">
+								<label for="peso">Peso</label>
+								<input type="text" th:field="*{peso}" id="peso" class="form-control" placeholder="Ingresa tu peso"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="altura">Altura</label>
+								<input type="text" th:field="*{altura}" id="altura" class="form-control" placeholder="Ingresa tu altura"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="temperatura">Temperatura</label>
+								<input type="text" th:field="*{temperatura}" id="temperatura" class="form-control" placeholder="Ingresa tu temperatura"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="presion">Presion</label>
+								<input type="text" th:field="*{presion}" id="presion" class="form-control" placeholder="Ingresa tu presion"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="alergias">Alergias</label>
+								<input type="text" th:field="*{alergias}" id="alergias" class="form-control" placeholder="Ingresa tu presion"/> <br/>
+							</div>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info">
+									Agregar
+								</button>
+							</div>
+								
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div id="create-footer" th:replace="~{/fragments/footer :: footer}"></div>
 </body>
 
 

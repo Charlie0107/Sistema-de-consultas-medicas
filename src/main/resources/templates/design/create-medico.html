@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns=:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+	th:replace="~{layouts/dashboard :: main-fragment(
+		~{::#create-sidebar},
+		~{::#create-header},
+		~{::#create-title},
+		~{::#create-main-content},
+		~{::#create-footer}
+	)}"
+>
 	
 <head>
 	<meta charset="ISO-8859-1">
@@ -9,53 +17,56 @@
 	</th:block>
 </head>
 <body>
+	<div id="create-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
+    <div id="create-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Crear nuevo Medico</h1>
-				<div class="card-body">
-					<form th:action="@{/addmedico}" th:object="${medico}" method="POST">
-						<div class="form-group">
-							<label for="cedula">Cédula</label>
-							<input type="text" th:field="*{cedula}" id="cedula" class="form-control" placeholder="Ingresa tu cédula"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="persona">Persona</label>
-							<div>
-								<select th:field="*{persona}" class="form-select" required>
-									<th:block th:each="persona : ${personas}">
-										<option th:text="${persona.nombre}" th:value="${persona.id}"></option>
-									</th>
-								</select> <br/>
+		<div id="create-title" class="row"></div>
+		<div id="create-main-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h1 class="text-center" style="margin-top: revert;">Crear nuevo Medico</h1>
+					<div class="card-body">
+						<form th:action="@{/addmedico}" th:object="${medico}" method="POST">
+							<div class="form-group">
+								<label for="cedula">Cédula</label>
+								<input type="text" th:field="*{cedula}" id="cedula" class="form-control" placeholder="Ingresa tu cédula"/> <br/>
 							</div>
-							<div>
-								<select th:field="*{persona}" class="form-select" required>
-									<th:block th:each="persona : ${personas}">
-										<option th:text="${persona.apeMat}" th:value="${persona.id}"></option>
-									</th>
-								</select> <br/>
+							<div class="form-group">
+								<label for="persona">Persona</label>
+								<div>
+									<select th:field="*{persona}" class="form-select" required>
+										<th:block th:each="persona : ${personas}">
+											<option th:text="${persona.nombre}" th:value="${persona.id}"></option>
+										</th>
+									</select> <br/>
+								</div>
+								<div>
+									<select th:field="*{persona}" class="form-select" required>
+										<th:block th:each="persona : ${personas}">
+											<option th:text="${persona.apeMat}" th:value="${persona.id}"></option>
+										</th>
+									</select> <br/>
+								</div>
+								<div>
+									<select th:field="*{persona}" class="form-select" required>
+										<th:block th:each="persona : ${personas}">
+											<option th:text="${persona.apePat}" th:value="${persona.id}"></option>
+										</th>
+									</select> <br/>
+								</div>
 							</div>
-							<div>
-								<select th:field="*{persona}" class="form-select" required>
-									<th:block th:each="persona : ${personas}">
-										<option th:text="${persona.apePat}" th:value="${persona.id}"></option>
-									</th>
-								</select> <br/>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info">
+									Agregar
+								</button>
 							</div>
-						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-info">
-								Agregar
-							</button>
-						</div>
-							
-					</form>
+								
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div id="create-footer" th:replace="~{/fragments/footer :: footer}"></div>
 </body>
-
-
-
 </html>

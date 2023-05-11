@@ -1,81 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" xmlns=:th="http://thymeleaf.org">
-	
+<html lang="en" xmlns:th="http://thymeleaf.org"
+	th:replace="~{layouts/dashboard :: main-fragment(
+		~{::#paciente-sidebar},
+		~{::#paciente-header},
+		~{::#paciente-title},
+		~{::#paciente-main-content},
+		~{::#paciente-footer}
+	)}"
+>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Listado de pacientes</title>
-	<!-- font icons -->
     <link rel="stylesheet" href="/vendors/themify-icons/css/themify-icons.css">
-
-    <!-- Bootstrap + Dorang main styles -->
 	<link rel="stylesheet" href="/css/dorang.css">
 	<th:block id="customers-static-resources">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">		
 	</th:block>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" class="dark-theme">
-	<nav class="page-navbar" data-spy="affix" data-offset-top="10">
-        <ul class="nav-navbar container">
-            <li class="nav-item"><a th:href="@{/consultas}" class="nav-link">Consultas</a></li>
-            <li class="nav-item"><a th:href="@{/pacientes}" class="nav-link">Pacientes</a></li>
-			<li class="nav-item"><a th:href="@{/personas}" class="nav-link">Personas</a></li>
-            <li class="nav-item"><a th:href="@{/}" class="nav-link"><img src="/imgs/placeholder.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page"></a></li>
-            <li class="nav-item"><a th:href="@{/medicos}" class="nav-link">Médicos</a></li>
-            <li class="nav-item"><a th:href="@{/especialidades}" class="nav-link">Especialidades</a></li>
-			<li class="nav-item"><a th:href="@{/medicamentos}" class="nav-link">Medicamentos</a></li>
-        </ul>
-    </nav><!-- end of page navbar -->
-    
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+	<div id="paciente-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
+    <div id="paciente-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div class="row">
-			<h1>Lista de personas</h1>		
-		</div>	
-		<div class="row">
-			<div class="col-lg-3"> 
-				<a th:href="@{/new}" class="btn btn-success">Add Persona</a>
-			</div>
+		<div id="paciente-title" class="row">
+			<div class="row">
+				<h1>Lista de pacientes</h1>		
+			</div>	
 		</div>
-		<table class="table table-dark table-striped">
-			<thead class="table-light">
-				<tr>
-					<th>Peso</th>
-					<th>Altura</th>
-					<th>Temperatura</th>
-					<th>Presion</th>
-					<th>Alergias</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr th:each="paciente : ${pacientes}">
-					<td th:text="${paciente.peso}"></td>
-					<td th:text="${paciente.altura}"></td>
-					<td th:text="${paciente.temperatura}"></td>
-					<td th:text="${paciente.presion}"></td>
-					<td th:text="${paciente.alergias}"></td>
-					<td>
-						<a th:href="@{/edit/{id}(id=${paciente.id})}"
-						class="btn btn-outline-info">
-						Editar
-						</a>
-						<a th:href="@{/delete/{id}(id=${paciente.id})}"
-						class="btn btn-outline-danger">
-						Eliminar
-						</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>	
+		<div id="paciente-main-content">
+			<div class="row pb-3">
+				<div class="col-lg-3"> 
+					<a th:href="@{/new}" class="btn btn-success">Aagregar paciente</a>
+				</div>
+			</div>
+			<table class="table table-dark table-striped">
+				<thead class="table-light">
+					<tr>
+						<th>Peso</th>
+						<th>Altura</th>
+						<th>Temperatura</th>
+						<th>Presion</th>
+						<th>Alergias</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="paciente : ${pacientes}">
+						<td th:text="${paciente.peso}"></td>
+						<td th:text="${paciente.altura}"></td>
+						<td th:text="${paciente.temperatura}"></td>
+						<td th:text="${paciente.presion}"></td>
+						<td th:text="${paciente.alergias}"></td>
+						<td>
+							<a th:href="@{/edit/{id}(id=${paciente.id})}"
+							class="btn btn-outline-info">
+							Editar
+							</a>
+							<a th:href="@{/delete/{id}(id=${paciente.id})}"
+							class="btn btn-outline-danger">
+							Eliminar
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	
+	<div id="paciente-footer" th:replace="~{/fragments/footer :: footer}"></div>
 </body>
-	
-	
-	
 </html>

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns=:th="http://thymeleaf.org">
-	
+<html lang="en" xmlns:th="http://thymeleaf.org"
+	th:replace="~{layouts/dashboard :: main-fragment(
+		~{::#create-sidebar},
+		~{::#create-header},
+		~{::#create-title},
+		~{::#create-main-content},
+		~{::#create-footer}
+	)}"
+>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Listado de medicamentos</title>
@@ -9,45 +16,48 @@
 	</th:block>
 </head>
 <body>
+	<div id="create-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
+    <div id="create-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Crear nuevo Medicamento</h1>
-				<div class="card-body">
-					<form th:action="@{/addmedicamento}" th:object="${medicamento}" method="POST">
-						<div class="form-group">
-							<label for="nombre">Nombre</label>
-							<input type="text" th:field="*{nombre}" id="nombre" class="form-control" placeholder="Ingresa tu nombre"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="cantidad_contenida">Cantidad</label>
-							<input type="text" th:field="*{cantidad_contenida}" id="cantidad_contenida" class="form-control" placeholder="Ingresa la cantidad del medicamento"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="caducidad">Caducidad</label>
-							<input type="date" th:field="*{caducidad}" id="caducidad" class="form-control" placeholder="Ingresa la caducidad"/> <br/>
-						</div>
-						<div class="form-group">
-							<label for="num_serie">Numero de serie</label>
-							<input type="text" th:field="*{num_serie}" id="num_serie" class="form-control" placeholder="Ingresa el numero de serie"/> <br/>
-						</div>
-                        <div class="form-group">
-							<label for="laboratorio">Laboratorio</label>
-							<input type="text" th:field="*{laboratorio}" id="laboratorio" class="form-control" placeholder="Ingresa el laboratorio del medicamento"/> <br/>
-						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-info">
-								Agregar
-							</button>
-						</div>
-							
-					</form>
+		<div id="create-title" class="row"></div>
+		<div id="create-main-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h1 class="text-center" style="margin-top: revert;">Crear nuevo Medicamento</h1>
+					<div class="card-body">
+						<form th:action="@{/addmedicamento}" th:object="${medicamento}" method="POST">
+							<div class="form-group">
+								<label for="nombre">Nombre</label>
+								<input type="text" th:field="*{nombre}" id="nombre" class="form-control" placeholder="Ingresa tu nombre"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="cantidad_contenida">Cantidad</label>
+								<input type="text" th:field="*{cantidad_contenida}" id="cantidad_contenida" class="form-control" placeholder="Ingresa la cantidad del medicamento"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="caducidad">Caducidad</label>
+								<input type="date" th:field="*{caducidad}" id="caducidad" class="form-control" placeholder="Ingresa la caducidad"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="num_serie">Numero de serie</label>
+								<input type="text" th:field="*{num_serie}" id="num_serie" class="form-control" placeholder="Ingresa el numero de serie"/> <br/>
+							</div>
+							<div class="form-group">
+								<label for="laboratorio">Laboratorio</label>
+								<input type="text" th:field="*{laboratorio}" id="laboratorio" class="form-control" placeholder="Ingresa el laboratorio del medicamento"/> <br/>
+							</div>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info">
+									Agregar
+								</button>
+							</div>
+								
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div id="create-footer" th:replace="~{/fragments/footer :: footer}"></div>
 </body>
-
-
-
 </html>

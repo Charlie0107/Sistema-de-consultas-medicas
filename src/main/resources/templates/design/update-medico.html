@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns=:th="http://thymeleaf.org">
-	
+<html lang="en" xmlns=:th="http://thymeleaf.org"
+	th:replace="~{layouts/dashboard :: main-fragment(
+		~{::#update-sidebar},
+		~{::#update-header},
+		~{::#update-title},
+		~{::#update-main-content},
+		~{::#update-footer}
+	)}"
+>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Listado de pacientes</title>
@@ -9,29 +16,32 @@
 	</th:block>
 </head>
 <body>
+	<div id="update-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
+    <div id="update-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Crear nuevo Medico</h1>
-				<div class="card-body">
-					<form th:action="@{/updateMedico/{id} (id=${medico.id})}" th:object="${medico}" method="POST">
-						<div class="form-group">
-							<label for="cedula">Cédula</label>
-							<input type="text" th:field="*{cedula}" id="cedula" class="form-control" placeholder="Ingresa tu cédula"/> <br/>
-						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-info">
-								Actualizar
-							</button>
-						</div>
-							
-					</form>
+		<div id="update-title" class="row"></div>
+		<div id="update-main-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<h1 class="text-center">Crear nuevo Medico</h1>
+					<div class="card-body">
+						<form th:action="@{/updateMedico/{id} (id=${medico.id})}" th:object="${medico}" method="POST">
+							<div class="form-group">
+								<label for="cedula">Cédula</label>
+								<input type="text" th:field="*{cedula}" id="cedula" class="form-control" placeholder="Ingresa tu cédula"/> <br/>
+							</div>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info">
+									Actualizar
+								</button>
+							</div>
+								
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div id="update-footer" th:replace="~{/fragments/footer :: footer}"></div>
 </body>
-
-
-
 </html>
