@@ -18,14 +18,9 @@
     <!-- page navbar -->
     <nav class="page-navbar" data-spy="affix" data-offset-top="10">
         <ul class="nav-navbar container">
-            <li class="nav-item"><a th:href="@{/consultas}" class="nav-link">Consultas</a></li>
-            <li class="nav-item"><a th:href="@{/pacientes}" class="nav-link">Pacientes</a></li>
-			<li class="nav-item"><a th:href="@{/personas}" class="nav-link">Personas</a></li>
-            <li class="nav-item"><a th:href="@{/}" class="nav-link"><img src="/imgs/placeholder.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page"></a></li>
-            <li class="nav-item"><a th:href="@{/medicos}" class="nav-link">Médicos</a></li>
-            <li class="nav-item"><a th:href="@{/especialidades}" class="nav-link">Especialidades</a></li>
-			<li class="nav-item"><a th:href="@{/medicamentos}" class="nav-link">Medicamentos</a></li>
-            <li class="nav-item" sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="nav-link">Cerrar sesión</a></li>
+            <li class="nav-item btn-outline-warning"><a th:href="@{/login}" class="nav-link">Inicio de sesión</a></li>
+            <li class="nav-item btn-outline-warning"><a th:href="@{/pacientes}" class="nav-link">Registro</a></li>
+            <li class="nav-item btn-outline-warning" sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="nav-link">Cerrar sesión</a></li>
         </ul>
     </nav><!-- end of page navbar -->
 
@@ -73,7 +68,7 @@
         <div class="row mb-4">
             <div class="col-md-4">
                 <a href="javascript:void(0)" class="overlay-img">
-                    <img src="/imgs/img-1.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">  
+                    <img src="/imgs/img-1.jpg" alt="Index">  
                     <div class="overlay"></div> 
                     <div class="des">
                         <h1 class="title">Médicos</h1>
@@ -84,7 +79,7 @@
             </div>
             <div class="col-md-4">
                 <a href="javascript:void(0)" class="overlay-img">
-                    <img src="/imgs/img-2.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">  
+                    <img src="/imgs/img-2.jpg" alt="Index">  
                     <div class="overlay"></div> 
                     <div class="des">
                         <h1 class="title">Agenda tu cita </h1>
@@ -95,7 +90,7 @@
             </div>
             <div class="col-md-4">
                 <a href="javascript:void(0)" class="overlay-img">
-                    <img src="/imgs/img-3.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">  
+                    <img src="/imgs/img-3.jpg" alt="Index">  
                     <div class="overlay"></div> 
                     <div class="des">
                         <h1 class="title">Legalidad</h1>
@@ -119,7 +114,7 @@
         <div class="row mb-5">
             <div class="col-md-6">
                 <a href="javascript:void(0)" class="card">
-                    <img src="/imgs/blog-1.jpg" class="card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">
+                    <img src="/imgs/blog-1.jpg" class="card-img" alt="Index">
                     <div class="card-body">
                         <h6 class="card-subtitle">14 Noviembre, 2020</h6>
                         <h3 class="card-title">Atención médica eficiente</h3>
@@ -129,7 +124,7 @@
             </div>  
             <div class="col-md-6">
                 <a href="javascript:void(0)" class="card">
-                    <img src="/imgs/blog-2.jpg" class="card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, weber Landing page">
+                    <img src="/imgs/blog-2.jpg" class="card-img" alt="Index">
                     <div class="card-body">
                         <h6 class="card-subtitle">29 Mayo, 2022</h6>
                         <h3 class="card-title">Espacios de estancia</h3>
