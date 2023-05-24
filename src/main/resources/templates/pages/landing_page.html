@@ -22,11 +22,11 @@
   <body>
     <div id="home-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
     <div id="home-header" th:replace="~{/fragments/header :: header}"></div>
-    <div id="home-title">
+    <div id="home-title" style="padding: 2rem 1.5rem;">
 			  <h2>Bienvenido <span sec:authentication="principal.username"></span></h2>
 		</div>
     <div id="home-main-content" >    
-        <div>This is the content of the Home Page</div>
+        <div></div>
     </div>
     <div id="home-footer" th:replace="~{/fragments/footer :: footer}"></div>
 

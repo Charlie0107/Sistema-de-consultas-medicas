@@ -20,7 +20,6 @@
         <ul class="nav-navbar container">
             <li class="nav-item btn-outline-warning"><a th:href="@{/login}" class="nav-link">Inicio de sesión</a></li>
             <li class="nav-item btn-outline-warning"><a th:href="@{/pacientes}" class="nav-link">Registro</a></li>
-            <li class="nav-item btn-outline-warning" sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="nav-link">Cerrar sesión</a></li>
         </ul>
     </nav><!-- end of page navbar -->
 

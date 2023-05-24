@@ -50,7 +50,8 @@ public class MedicoController {
 	@PostMapping("/addmedico")
 	public String addMedico(Medico medico) {
 		medicoRepository.save(medico);
-		return "design/index-medico";
+		return "redirect:/medicos";
+		//return "design/index-medico";
 	}
 	
 	@GetMapping("/newmedico")

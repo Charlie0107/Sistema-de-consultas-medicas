@@ -41,7 +41,8 @@ public class PersonaController {
 		
 		personaRepository.save(persona);
 		redirect.addFlashAttribute("msgExito", "La información ha sido agregado con exito");
-		return "design/index-persona";
+		return "redirect:/personas";
+		//return "design/index-persona";
 		//return "design/index-medicamento";
 	}
 	

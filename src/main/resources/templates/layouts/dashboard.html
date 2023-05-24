@@ -31,7 +31,7 @@
           <!--dynamic content-->
           <!--you can replace this using page-->
         </div>
-        <div th:insert="${footer} ?: ~{}"></div>
+        <div th:insert="${footer} ?: ~{}" style=" position: relative; min-height: 100vh;"></div>
       </div>
     </div>
     <script th:src="@{/js/feather.min.js}" src="/js/feather.min.js"></script>
