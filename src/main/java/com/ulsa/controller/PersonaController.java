@@ -1,6 +1,11 @@
 package com.ulsa.controller;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,12 +13,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lowagie.text.DocumentException;
 import com.ulsa.entity.Persona;
+import com.ulsa.pagination.PageRender;
+import com.ulsa.reports.PersonExcel;
+import com.ulsa.reports.PersonPdf;
 import com.ulsa.repository.PersonaRepository;
 
 
@@ -25,10 +38,15 @@ public class PersonaController {
 	private PersonaRepository personaRepository;
 	
 	@GetMapping("/personas")
-	public String indexPersonas(Model model) {
-		List<Persona> personas = personaRepository.findAll();
+	public String indexPersonas(@RequestParam(name = "page",defaultValue = "0") int page,Model model) {
+		Pageable pageRequest = PageRequest.of(page, 4);
+		Page<Persona> personas = personaRepository.findAll(pageRequest);
+		PageRender<Persona> pageRender = new PageRender<>("/personas", personas);
+
+		//List<Persona> personas = personaRepository.findAll();
 		System.out.println("&&&&& index´Medicamento &&&&&&");
 		model.addAttribute("personas", personas);
+		model.addAttribute("page", pageRender);
 		return "design/index-persona";		
 	}
 	
@@ -84,6 +102,42 @@ public class PersonaController {
 		personaRepository.save(persona);
 		model.addAttribute("personas", personaRepository.findAll());
 		return "design/index-persona";
+	}
+
+	@GetMapping("/exportPDF")
+	public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Personas_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Persona> personas = personaRepository.findAll();
+		
+		PersonPdf exporter = new PersonPdf(personas);
+		exporter.exportar(response);
+	}
+
+	@GetMapping("/exportExcel")
+	public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Empleados_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Persona> personas = personaRepository.findAll();
+		
+		PersonExcel exporter = new PersonExcel(personas);
+		exporter.exportar(response);
 	}
 	
 }

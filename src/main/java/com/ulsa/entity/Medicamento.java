@@ -38,6 +38,7 @@ public class Medicamento {
     }
 
     public Medicamento(long id, String nombre, String cantidad_contenida, Date caducidad, String num_serie, String laboratorio, Receta receta) {
+        super();
         this.id = id;
         this.nombre = nombre;
         this.cantidad_contenida = cantidad_contenida;
@@ -47,7 +48,7 @@ public class Medicamento {
         this.receta = receta;
     }
 
-
+    
 
     public long getId() {
         return this.id;

@@ -1,5 +1,7 @@
 package com.ulsa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,36 +18,30 @@ import com.ulsa.repository.PacienteRepository;
 
 
 @Controller
-public class MedicalController {
+public class PacienteController {
 	
 	//private PacienteService pacienteService;
-	private final PacienteRepository pacienteRepository;
-	
 	@Autowired
-	public MedicalController(PacienteRepository pacienteRepository) {
-		this.pacienteRepository = pacienteRepository;		
-	}
+	private PacienteRepository pacienteRepository;
 	
 	@GetMapping("/pacientes")
 	public String indexPacientes(Model model) {
+		List<Paciente> pacientes = pacienteRepository.findAll();
 		System.out.println("&&&&& index´Pacientes &&&&&&");
-		model.addAttribute("pacientes", pacienteRepository.findAll());
+		model.addAttribute("pacientes", pacientes);
 		return "design/index-paciente";
 		
 	}
 	
 	@PostMapping("/addpaciente")
-	public String addPaciente(@Validated Paciente paciente, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			return "design/create-paciente";
-		}
+	public String addPaciente(Paciente paciente) {
 		pacienteRepository.save(paciente);
-		model.addAttribute("pacientes", pacienteRepository.findAll());
-		return "design/index-paciente";
+		return "redirect:/pacientes";
 	}
 	
 	@GetMapping("/new")
-	public String showSignUpForm(Paciente paciente) {
+	public String showSignUpForm(Model model) {
+		model.addAttribute("pacientes", new Paciente());
 		System.out.println("&&&&& showSignUpForm &&&&&&");
 		return "design/create-paciente";
 	}

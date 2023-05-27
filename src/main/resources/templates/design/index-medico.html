@@ -36,25 +36,19 @@
 				<thead class="table-light">
 					<tr>
 						<th>Cédula</th>
-						<th>Nombre</th>
-						<th>Apellido Materno</th>
-						<th>Apellido Paterno</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
 				
 				<tbody>
 					<tr th:each="medico : ${medicos}">
-						<td th:text="${medico.cedula}"></td>	
-						<td th:text="${medico.persona.nombre}"></td>	
-						<td th:text="${medico.persona.apeMat}"></td>	
-						<td th:text="${medico.persona.apePat}"></td>		
+						<td th:text="${medico.cedula}"></td>			
 						<td>
-							<a th:href="@{/editPersona/{id}(id=${persona.id})}"
+							<a th:href="@{/editMedico/{id}(id=${medico.id})}"
 							class="btn btn-outline-info">
 							Editar
 							</a>
-							<a th:href="@{/deletePersona/{id}(id=${persona.id})}"
+							<a th:href="@{/deleteMedico/{id}(id=${medico.id})}"
 							class="btn btn-outline-danger">
 							Eliminar
 							</a>
