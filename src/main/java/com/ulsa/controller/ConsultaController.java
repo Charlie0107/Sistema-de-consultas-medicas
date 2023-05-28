@@ -1,6 +1,11 @@
 package com.ulsa.controller;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +20,10 @@ import com.ulsa.entity.Consulta;
 import com.ulsa.entity.Medico;
 import com.ulsa.repository.ConsultaRepository;
 import com.ulsa.repository.MedicoRepository;
+import com.lowagie.text.DocumentException;
+import com.ulsa.pagination.PageRender;
+import com.ulsa.reports.ConsultaExcel;
+import com.ulsa.reports.ConsultaPdf;
 
 @Controller
 public class ConsultaController {
@@ -91,6 +100,42 @@ private MedicoRepository medicoRepository;
 		consultaRepository.save(consulta);
 		model.addAttribute("consultas", consultaRepository.findAll());
 		return "design/index-consulta";
+	}
+
+	@GetMapping("/exportPDFConsultas")
+	public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Consultas_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Consulta> consultas = consultaRepository.findAll();
+		
+		ConsultaPdf exporter = new ConsultaPdf(consultas);
+		exporter.exportar(response);
+	}
+
+	@GetMapping("/exportExcelConsultas")
+	public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Consultas_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Consulta> consultas = consultaRepository.findAll();
+		
+		ConsultaExcel exporter = new ConsultaExcel(consultas);
+		exporter.exportar(response);
 	}
 	
 }

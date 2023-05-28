@@ -1,6 +1,11 @@
 package com.ulsa.controller;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ulsa.entity.Paciente;
 import com.ulsa.repository.PacienteRepository;
+import com.lowagie.text.DocumentException;
+import com.ulsa.pagination.PageRender;
+import com.ulsa.reports.PacienteExcel;
+import com.ulsa.reports.PacientePdf;
 
 
 
@@ -77,6 +86,42 @@ public class PacienteController {
 		pacienteRepository.save(paciente);
 		model.addAttribute("pacientes", pacienteRepository.findAll());
 		return "design/index-paciente";
+	}
+
+	@GetMapping("/exportPDFPacientes")
+	public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Pacientes_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Paciente> pacientes = pacienteRepository.findAll();
+		
+		PacientePdf exporter = new PacientePdf(pacientes);
+		exporter.exportar(response);
+	}
+
+	@GetMapping("/exportExcelPacientes")
+	public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Pacientes_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Paciente> pacientes = pacienteRepository.findAll();
+		
+		PacienteExcel exporter = new PacienteExcel(pacientes);
+		exporter.exportar(response);
 	}
 	
 }

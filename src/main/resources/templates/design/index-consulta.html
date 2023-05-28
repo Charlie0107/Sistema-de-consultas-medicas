@@ -21,13 +21,15 @@
 	<div id="consulta-sidebar" th:replace="~{/fragments/sidebar :: sidebar}"></div>
     <div id="consulta-header" th:replace="~{/fragments/header :: header}"></div>
 	<div class="container">
-		<div id="consulta-title" class="row">
+		<div id="consulta-title" class="row" style="padding: 2rem 1.5rem;">
 			<h1>Lista de consultas</h1>		
 		</div>	
 		<div id="consulta-main-content">
 			<div class="row pb-3">
-				<div class="col-lg-3"> 
-					<a th:href="@{/newconsulta}" class="btn btn-success">Agregar consulta</a>
+				<div class="col-md-4"> 
+					<a th:href="@{/newconsulta}" class="btn btn-warning">Agregar consulta</a>
+					<a th:href="@{/exportPDFConsultas}" class="btn btn-danger">Exportar PDF</a>
+					<a th:href="@{/exportExcelConsultas}" class="btn btn-success">Exportar Excel</a>
 				</div>
 			</div>
 			<table class="table table-dark table-striped">

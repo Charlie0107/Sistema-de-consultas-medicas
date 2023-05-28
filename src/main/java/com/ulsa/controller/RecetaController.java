@@ -1,6 +1,11 @@
 package com.ulsa.controller;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +21,10 @@ import com.ulsa.entity.Medicamento;
 import com.ulsa.entity.Receta;
 import com.ulsa.repository.MedicamentoRepository;
 import com.ulsa.repository.RecetaRepository;
+import com.lowagie.text.DocumentException;
+import com.ulsa.pagination.PageRender;
+import com.ulsa.reports.RecetaExcel;
+import com.ulsa.reports.RecetaPdf;
 
 @Controller
 public class RecetaController {
@@ -87,6 +96,42 @@ public class RecetaController {
 		recetaRepository.save(receta);
 		model.addAttribute("recetas", recetaRepository.findAll());
 		return "design/index-receta";
+	}
+
+	@GetMapping("/exportPDFRecetas")
+	public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Recetas_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Receta> recetas = recetaRepository.findAll();
+		
+		RecetaPdf exporter = new RecetaPdf(recetas);
+		exporter.exportar(response);
+	}
+
+	@GetMapping("/exportExcelRecetas")
+	public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Recetas_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Receta> recetas = recetaRepository.findAll();
+		
+		RecetaExcel exporter = new RecetaExcel(recetas);
+		exporter.exportar(response);
 	}
     
 }

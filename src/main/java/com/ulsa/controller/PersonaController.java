@@ -130,7 +130,7 @@ public class PersonaController {
 		String fechaActual = dateFormatter.format(new Date());
 		
 		String cabecera = "Content-Disposition";
-		String valor = "attachment; filename=Empleados_" + fechaActual + ".xlsx";
+		String valor = "attachment; filename=Personas_" + fechaActual + ".xlsx";
 		
 		response.setHeader(cabecera, valor);
 		

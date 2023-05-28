@@ -1,6 +1,11 @@
 package com.ulsa.controller;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,10 @@ import com.ulsa.entity.Persona;
 import com.ulsa.repository.EspecialidadRepository;
 import com.ulsa.repository.MedicoRepository;
 import com.ulsa.repository.PersonaRepository;
+import com.lowagie.text.DocumentException;
+import com.ulsa.pagination.PageRender;
+import com.ulsa.reports.MedicoExcel;
+import com.ulsa.reports.MedicoPdf;
 
 @Controller
 public class MedicoController {
@@ -94,6 +103,42 @@ public class MedicoController {
 		medicoRepository.save(medico);
 		model.addAttribute("medicos", medicoRepository.findAll());
 		return "design/index-medico";
+	}
+
+	@GetMapping("/exportPDFMedicos")
+	public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Medicos_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Medico> medicos = medicoRepository.findAll();
+		
+		MedicoPdf exporter = new MedicoPdf(medicos);
+		exporter.exportar(response);
+	}
+
+	@GetMapping("/exportExcelMedicos")
+	public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Medicos_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Medico> medicos = medicoRepository.findAll();
+		
+		MedicoExcel exporter = new MedicoExcel(medicos);
+		exporter.exportar(response);
 	}
 
 }
